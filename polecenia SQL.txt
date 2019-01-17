@@ -1,0 +1,25 @@
+select * from samochod;
+
+
+select KL_Imie, KL_Nazwisko, KL_Email, KL_Telefon from klient;
+
+
+select * from klient where KL_NIP IS NOT NULL;
+
+
+Select klient.KL_Imie, klient.KL_Nazwisko, samochod.S_Marka, samochod.S_Model, S_RokProdukcji, samochod.S_NumerRejestracyjny FROM umowa
+INNER JOIN samochod ON umowa.Samochody_S_ID=samochod.S_ID
+INNER JOIN klient ON umowa.Klienci_KL_ID=klient.KL_ID
+WHERE samochod.S_TypSkrzyni='automatyczna'
+ORDER BY klient.KL_Nazwisko;
+
+
+Select samochod.S_Marka, samochod.S_Model, samochod.S_NumerRejestracyjny, count(umowa.Samochody_S_ID) FROM samochod
+INNER JOIN umowa ON umowa.Samochody_S_ID=samochod.S_ID
+GROUP BY samochod.S_Marka
+ORDER BY samochod.S_Model AND samochod.S_Marka;
+
+
+INSERT INTO umowa (U_DataZawarcia, U_ObowiazujeOD, U_ObowiazujeDO, U_DataPlatnosci, U_Protokol, U_Uwagi, Klienci_KL_ID, Samochody_S_ID)
+VALUES ('2018-12-20', '2018-12-20', '2018-12-30', '2018-12-20', 1, NULL, 2, 7); 
+
